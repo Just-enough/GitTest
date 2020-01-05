@@ -13,11 +13,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class test {
 
-    @Autowired
-    OrderService orderService;
-    @Test
-    public void testGetList(){
-        orderService.getList();
+    public static void main(String[] args) {
+        System.out.println();
     }
-
 }
