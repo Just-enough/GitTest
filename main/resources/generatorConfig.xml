@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--用于 Mybatis 代码生成
+    <generatorConfiguration>
+    导入属性：properties
+    数据库驱动:classPathEntry
+    <context id="default" targetRuntime="MyBatis3">
+        配置四大参数 jdbcConnection
+        类型处理器: javaTypeResolver
+        注释生成器: commentGenerator
+
+            pojo类映射: javaModelGenerator 包:targetPackage  项目下路径:targetProject
+   生成              P：enableSubPackages(子包)  constructorBased trimStrings immutable(有setter)
+   文件     mapper文件:sqlMapGenerator
+            配置文件:javaClientGenerator 类型 type="XMLMAPPER"
+
+        指定表: <table catalog="" tableName="torder"></table>
+--><!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="db.properties"></properties>
+    <classPathEntry location="${jdbc.location}"/>
+    <context id="default" targetRuntime="MyBatis3">
+       <commentGenerator>
+           <property name="suppressDate" value="true"/>
+           <property name="suppressAllComments" value="true"/>
+       </commentGenerator>
+        <jdbcConnection
+            driverClass="${driver}"
+            connectionURL="${jdbc.url}"
+            userId="${jdbc.username}"
+            password="${jdbc.password}">
+        </jdbcConnection>
+
+        <!--pojo类-->
+        <javaModelGenerator targetPackage="com.test.pojo" targetProject="src/main/java">
+            <property name="enableSubPackages" value="flase"/>
+            <property name="constructorBased" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+        <!--Mapper接口-->
+        <sqlMapGenerator targetPackage="com.test.dao" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!--xml文件-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.test.dao" targetProject="src/main/java"/>
+        <table tableName="torder"></table>
+    </context>
+</generatorConfiguration>
